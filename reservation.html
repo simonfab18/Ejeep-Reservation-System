@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<head>
+<title> Reservation </title>
+<link rel="stylesheet" href="skin1.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+
+<div class="rectangle">
+    <img src="rectangle.webp" alt="Snow" style="width:100%;">
+	<a class="ejeepreser">E-Jeep Reservation</a>
+	<a class="welcome">Reservation</a>
+    <a href="dashboard.html" class="dashboard">Dashboard</a>
+    <a href="reservation.html" class="reservation">Reservation</a>
+    <a href="e-jeep.html" class="ejeep">E-Jeep</a>
+    <a href="schedule.html" class="seats">Schedule</a>
+    <a href="route.html" class="availability">Routes</a>
+	<a href="Index.html" class="logout">Logout</a>
+	
+</div>
+
+
+    <ul class="reservation-list" id="reservationList">
+        <div class="header-item">ID-No. Name Seats Route E-Jeep Schedule</div>
+        
+		
+    </ul>
+	
+    <div class="reservation-buttons">
+        <button class="add-button" onclick="openModal('addModal')">Add Reservation</button>
+        
+    </div>
+</div>
+
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('addModal')">&times;</span>
+        <h3>Add Reservation</h3>
+        <!-- Add your form elements for adding a reservation -->
+        <label for="customerName">ID-No.:</label>
+        <input type="text" id="customerName">
+        <br>
+        <label for="seats">Name:</label>
+        <input type="int" id="seats">
+        <br>
+        <label for="ejeep">Seat:</label>
+        <input type="text" id="ejeep">
+        <br>
+        <label for="availability">Route:</label>
+        <input type="text" id="availability">
+        <br>
+        <label for="routes">E-Jeep:</label>
+        <input type="text" id="routes">
+        <br>
+		<label for="customerid">Schedule:</label>
+        <input type="text" id="customerid">
+        <br>
+        <button onclick="addReservation()">Add</button>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editModal')">&times;</span>
+        <h3>Edit Reservation</h3>
+        <!-- Add your form elements for editing a reservation -->
+        <label for="editCustomerName">ID-No.:</label>
+        <input type="text" id="editCustomerName">
+        <br>
+        <label for="editSeats">Name:</label>
+        <input type="text" id="editSeats">
+        <br>
+        <label for="editEjeep">Seats:</label>
+        <input type="text" id="editEjeep">
+        <br>
+        <label for="editAvailability">Route:</label>
+        <input type="text" id="editAvailability">
+        <br>
+        <label for="editRoutes">E-Jeep:</label>
+        <input type="text" id="editRoutes">
+        <br>
+		<label for="editCustomerid">Schedule:</label>
+        <input type="text" id="editCustomerid">
+        <br>
+        <button onclick="updateReservation()">Save Changes</button>
+    </div>
+</div>
+
+<script>
+var selectedReservation;
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+   function addReservation() {
+        var customerName = document.getElementById('customerName').value;
+        var seats = document.getElementById('seats').value;
+        var ejeep = document.getElementById('ejeep').value;
+        var availability = document.getElementById('availability').value;
+        var routes = document.getElementById('routes').value;
+		var customerid = document.getElementById('customerid').value;
+
+        var reservationItem = document.createElement('li');
+        reservationItem.className = 'reservation-item';
+        reservationItem.innerHTML = `
+            <span>${customerName}</span>
+            <span>${seats}</span>
+            <span>${ejeep}</span>
+            <span>${availability}</span>
+            <span>${routes}</span>
+			<span>${customerid}</span>
+            <button class="modify-button" onclick="openEditModal(this)">
+                Modify
+            </button>
+            <button class="delete-button" onclick="deleteReservation(this)">
+                Delete
+            </button>
+        `;
+
+        document.getElementById('reservationList').appendChild(reservationItem);
+
+        document.getElementById('customerName').value = '';
+        document.getElementById('seats').value = '';
+        document.getElementById('ejeep').value = '';
+        document.getElementById('availability').value = '';
+        document.getElementById('routes').value = '';
+		document.getElementById('customerid').value = '';
+
+        closeModal('addModal');
+    }
+
+	
+	function updateReservation() {
+        var editCustomerName = document.getElementById('editCustomerName').value;
+        var editSeats = document.getElementById('editSeats').value;
+        var editEjeep = document.getElementById('editEjeep').value;
+        var editAvailability = document.getElementById('editAvailability').value;
+        var editRoutes = document.getElementById('editRoutes').value;
+		var editCustomerid = document.getElementById('editCustomerid').value;
+
+        if (selectedReservation) {
+            selectedReservation.innerHTML = `
+                <span>${editCustomerName}</span>
+                <span>${editSeats}</span>
+                <span>${editEjeep}</span>
+                <span>${editAvailability}</span>
+                <span>${editRoutes}</span>
+				<span>${editCustomerid}</span>
+                <button class="modify-button" onclick="openEditModal(this)">
+                    Modify
+                </button>
+                <button class="delete-button" onclick="deleteReservation(this)">
+                    Delete
+                </button>
+            `;
+
+            document.getElementById('editCustomerName').value = '';
+            document.getElementById('editSeats').value = '';
+            document.getElementById('editEjeep').value = '';
+            document.getElementById('editAvailability').value = '';
+            document.getElementById('editRoutes').value = '';
+			document.getElementById('editCustomerid').value = '';
+
+            closeModal('editModal');
+        }
+    }
+
+
+    function openEditModal(button) {
+        selectedReservation = button.closest('.reservation-item');
+        var spans = selectedReservation.querySelectorAll('span');
+        document.getElementById('editCustomerName').value = spans[0].textContent;
+        document.getElementById('editSeats').value = spans[1].textContent;
+        document.getElementById('editEjeep').value = spans[2].textContent;
+        document.getElementById('editAvailability').value = spans[3].textContent;
+        document.getElementById('editRoutes').value = spans[4].textContent;
+		document.getElementById('editCustomerid').value = spans[5].textContent;
+        openModal('editModal');
+    }
+	
+	 function deleteReservation(button) {
+        var reservationItem = button.closest('.reservation-item');
+        reservationItem.remove();
+    }
+	
+	</script>
+ 
+
+
+
+

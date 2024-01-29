@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+<title> Customer Reserv</title>
+<link rel="stylesheet" href="user2.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+
+<div class="rectangle">
+    <img src="rectangle.webp" alt="Snow" style="width:100%;">
+	<a class="ejeepreser">E-Jeep Reservation</a>
+	<a class="welcome">Add a Reservation</a>
+	<a class="admin">Admin</a>
+    <a href="customer.html" class="dashboard">Dashboard</a>
+    <a href="customerreserv.html" class="reservation">Reservation</a>
+    <a href="customermanage.html" class="account">Account</a>
+    <a href="link4.html" class="seats">Schedule</a>
+    <a href="link5.html" class="availability">Routes</a>
+	<a href="link5.html" class="logout">Logout</a>
+	
+</div>
+
+
+    <ul class="reservation-list" id="reservationList">
+        <div class="header-item">E-jeep Route Schedule Availability</div>
+        
+		
+    </ul>
+	
+    <div class="reservation-buttons">
+        <button class="add-button" onclick="openModal('addModal')">Add Reservation</button>
+        
+    </div>
+</div>
+
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('addModal')">&times;</span>
+        <h3>Add Reservation</h3>
+        <!-- Add your form elements for adding a reservation -->
+        <label for="customerName">E-Jeep:</label>
+        <input type="text" id="customerName">
+        <br>
+        <label for="seats">Route:</label>
+        <input type="text" id="seats">
+        <br>
+        <label for="ejeep">Schedule:</label>
+        <input type="text" id="ejeep">
+        <br>
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability">
+        <br>
+       
+        <br>
+        <button onclick="addReservation()">Add</button>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editModal')">&times;</span>
+        <h3>Edit Reservation</h3>
+        <!-- Add your form elements for editing a reservation -->
+        <label for="editCustomerName">E-Jeep:</label>
+        <input type="text" id="editCustomerName">
+        <br>
+        <label for="editSeats">Route:</label>
+        <input type="text" id="editSeats">
+        <br>
+        <label for="editEjeep">Schedule:</label>
+        <input type="text" id="editEjeep">
+        <br>
+        <label for="editAvailability">Availability:</label>
+        <input type="text" id="editAvailability">
+        <br>
+        
+        <button onclick="updateReservation()">Save Changes</button>
+    </div>
+</div>
+
+<script>
+var selectedReservation;
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+   function addReservation() {
+        var customerName = document.getElementById('customerName').value;
+        var seats = document.getElementById('seats').value;
+        var ejeep = document.getElementById('ejeep').value;
+        var availability = document.getElementById('availability').value;
+        
+
+        var reservationItem = document.createElement('li');
+        reservationItem.className = 'reservation-item';
+        reservationItem.innerHTML = `
+            <span>${customerName}</span>
+            <span>${seats}</span>
+            <span>${ejeep}</span>
+            <span>${availability}</span>
+           
+            <button class="modify-button" onclick="openEditModal(this)">
+                Modify
+            </button>
+            <button class="delete-button" onclick="deleteReservation(this)">
+                Delete
+            </button>
+        `;
+
+        document.getElementById('reservationList').appendChild(reservationItem);
+
+        document.getElementById('customerName').value = '';
+        document.getElementById('seats').value = '';
+        document.getElementById('ejeep').value = '';
+        document.getElementById('availability').value = '';
+        
+
+        closeModal('addModal');
+    }
+
+	
+	function updateReservation() {
+        var editCustomerName = document.getElementById('editCustomerName').value;
+        var editSeats = document.getElementById('editSeats').value;
+        var editEjeep = document.getElementById('editEjeep').value;
+        var editAvailability = document.getElementById('editAvailability').value;
+        
+
+        if (selectedReservation) {
+            selectedReservation.innerHTML = `
+                <span>${editCustomerName}</span>
+                <span>${editSeats}</span>
+                <span>${editEjeep}</span>
+                <span>${editAvailability}</span>
+                
+                <button class="modify-button" onclick="openEditModal(this)">
+                    Modify
+                </button>
+                <button class="delete-button" onclick="deleteReservation(this)">
+                    Delete
+                </button>
+            `;
+
+            document.getElementById('editCustomerName').value = '';
+            document.getElementById('editSeats').value = '';
+            document.getElementById('editEjeep').value = '';
+            document.getElementById('editAvailability').value = '';
+            
+
+            closeModal('editModal');
+        }
+    }
+
+
+    function openEditModal(button) {
+        selectedReservation = button.closest('.reservation-item');
+        var spans = selectedReservation.querySelectorAll('span');
+        document.getElementById('editCustomerName').value = spans[0].textContent;
+        document.getElementById('editSeats').value = spans[1].textContent;
+        document.getElementById('editEjeep').value = spans[2].textContent;
+        document.getElementById('editAvailability').value = spans[3].textContent;
+        
+        openModal('editModal');
+    }
+	
+	 function deleteReservation(button) {
+        var reservationItem = button.closest('.reservation-item');
+        reservationItem.remove();
+    }
+	
+	</script>
+ 
+
+
+
+

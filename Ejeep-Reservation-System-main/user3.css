@@ -1,0 +1,106 @@
+<style>
+    .rectangle-container {
+            position: relative;
+            text-align: center;
+            height: 200px; /* Adjust the height as needed */
+            overflow: hidden;
+        }
+
+        .rectangle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px; /* Adjust the width as needed */
+            height: 100%;
+        }
+
+        .rectangle img {
+            width: 200%;
+            height: 100%;
+        }
+		
+
+        
+
+        .ejeepreser,
+        .welcome,
+		.admin,
+        .dashboard,
+        .reservation,
+        .account,
+        .seats,
+        .availability,
+        .routes,
+        .logout {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+			text-decoration: none;
+			color: black;
+			font-size: 140%;
+			
+        }
+
+        .ejeepreser {
+            top: 5%;
+            left: 1px; /* Adjust the left position as needed */
+			font-size: 165%;
+			
+        }
+
+        .welcome {
+            top: 6%;
+            left: 295px;
+			font-size: 200%;
+			font-family: arial;
+			
+        }
+		
+		.admin {
+			top: 7%;
+			left: 350%;
+			font-size: 120%;
+			font-family: arial;
+		}
+		
+        .dashboard {
+		top: 15%;
+            left: 1px; /* Adjust the left position as needed */
+}
+		
+
+        .reservation {
+            top: 25%;
+            left: 1px; /* Adjust the left position as needed */
+        }
+
+        .account {
+            position: absolute;
+		top: 35%;
+		left: 53px;
+		display: inline-block; /* Make it inline-block */
+		border: 2px solid black;
+		background-color: white;
+		border-color: #15367E;
+		color: #15367E;
+		padding: 5px; /* Adjust the padding as needed */
+		width: 60%;
+            
+        }
+        .seats {
+			top: 45%;
+			left: 1px;
+		}
+        .availability {
+			top: 55%;
+			left: 1px;
+		}
+        .routes{
+			top: 65%;
+			left: 1px;
+		}
+        .logout {
+            top: 90%;
+            left: 1px; /* Adjust the left position as needed */
+        }
+</style>

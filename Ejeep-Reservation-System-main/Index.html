@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Login Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+
+
+<div class="rectangle">
+    <img src="yellow.png" alt="Snow" style="width:100%;">
+	<img src="logo.png" alt="Logo" class="logo">
+	<a class="ejeepreser">
+	E-Jeep Reservation System</a>
+</div>
+
+  <div class="wrapper">
+    <header></header>
+    <form action="dashboard.html">
+      <div class="field user-id"> <!-- Updated class for user ID -->
+    <label for="user-id">User ID:</label> <!-- Updated label -->
+    <div class="input-area">
+        <input type="text" placeholder="000-0000"> <!-- Updated placeholder -->
+        <i class="icon fas fa-user"></i>
+        <i class="error error-icon fas fa-exclamation-circle"></i>
+    </div>
+    <div class="error error-txt">User ID can't be blank</div> <!-- Updated error message -->
+</div>
+
+      <div class="field password">
+		<label for="password">Password:</label>
+        <div class="input-area">
+          <input type="password" placeholder="********">
+          <i class="icon fas fa-lock"></i>
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+        </div>
+        <div class="error error-txt">Password can't be blank</div>
+      </div>
+      <div class="pass-txt"><a href="#"></a></div>
+      <input type="submit" value="Login">
+    </form>
+    <div class="sign-txt"> <a href="#">Signup now</a></div>
+  </div>
+
+  <script src="Script.js"></script>
+
+</body>
+</html>
